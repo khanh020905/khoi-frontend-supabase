@@ -17,7 +17,7 @@ import {
   UserPlus,
 } from "lucide-react";
 import { FormEvent, useEffect, useMemo, useState } from "react";
-import { isSupabaseConfigured, supabase } from "@/src/lib/supabase";
+import { isSupabaseConfigured, supabase } from "@/lib/supabase";
 
 type StatusRow = {
   id: string;

@@ -16,7 +16,7 @@ import {
   Inbox,
   BookOpen,
 } from "lucide-react";
-import { supabase } from "@/src/lib/supabase";
+import { supabase } from "@/lib/supabase";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
 
 type UserStatus = {

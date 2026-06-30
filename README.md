@@ -27,14 +27,14 @@ fe/
 │   │   ├── globals.css        # Global Tailwind variables
 │   │   ├── layout.tsx         # Root Layout
 │   │   └── page.tsx           # Landing Page
+│   ├── components/
+│   │   ├── admin/             # CMS Components (Sidebar, StatCard)
+│   │   ├── hooks/             # Reusable Custom Hooks
+│   │   ├── landing/           # Landing Page Components
+│   │   └── ui/                # Shared UI Components
 │   ├── lib/
 │   │   ├── supabase.ts        # Supabase client setup
 │   │   └── database.types.ts  # Supabase TypeScript types
-├── components/
-│   ├── admin/                 # CMS Components (Sidebar, StatCard)
-│   ├── hooks/                 # Reusable Custom Hooks
-│   ├── landing/               # Landing Page Components
-│   └── ui/                    # Shared UI Components
 ├── public/                    # Static assets
 └── .github/workflows/         # GitHub Actions CI/CD configuration
 ```
