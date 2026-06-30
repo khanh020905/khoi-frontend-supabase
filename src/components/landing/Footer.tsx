@@ -1,26 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight, BookOpen, MessageCircle, Music2, Send } from "lucide-react";
-
-const columns = [
-  {
-    title: "Product",
-    links: ["Features", "Courses", "Pricing", "Mobile App"],
-  },
-  {
-    title: "Learn",
-    links: ["Blog", "Study Tips", "Help Center", "Community"],
-  },
-  {
-    title: "Company",
-    links: ["About Us", "Careers", "Press", "Contact"],
-  },
-  {
-    title: "Legal",
-    links: ["Terms of Service", "Privacy Policy", "Cookie Policy"],
-  },
-];
+import { useLandingI18n } from "@/components/landing/i18n";
 
 export default function Footer() {
+  const { t } = useLandingI18n();
+  const copy = t.footer;
+
   return (
     <footer id="footer" className="bg-[#27235d] py-9 text-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -34,7 +21,7 @@ export default function Footer() {
               <span className="text-lg font-black">FluentFlow</span>
             </Link>
             <p className="mt-4 max-w-xs text-xs font-semibold leading-6 text-white/68">
-              Helping millions of learners around the world speak English with confidence.
+              {copy.description}
             </p>
             <div className="mt-5 flex gap-2">
               {[MessageCircle, Music2, Send].map((Icon, index) => (
@@ -42,7 +29,7 @@ export default function Footer() {
                   key={index}
                   href="#"
                   className="grid h-8 w-8 place-items-center rounded-full bg-white/10 text-white/76 transition-colors hover:bg-white/18 hover:text-white"
-                  aria-label="Social link"
+                  aria-label={copy.socialLabel}
                 >
                   <Icon className="h-4 w-4" />
                 </a>
@@ -51,7 +38,7 @@ export default function Footer() {
           </div>
 
           <div className="grid grid-cols-2 gap-7 sm:grid-cols-4">
-            {columns.map((column) => (
+            {copy.columns.map((column) => (
               <div key={column.title}>
                 <h3 className="text-xs font-black text-white">{column.title}</h3>
                 <ul className="mt-3 grid gap-2.5">
@@ -68,24 +55,24 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-xs font-black text-white">Stay in the loop</h3>
+            <h3 className="text-xs font-black text-white">{copy.newsletterTitle}</h3>
             <p className="mt-3 text-xs font-semibold leading-6 text-white/68">
-              Get learning tips and updates delivered to your inbox.
+              {copy.newsletterDescription}
             </p>
             <form className="mt-5 flex rounded-lg bg-white p-1">
               <label className="sr-only" htmlFor="footer-email">
-                Email address
+                {copy.emailLabel}
               </label>
               <input
                 id="footer-email"
                 type="email"
-                placeholder="Enter your email"
+                placeholder={copy.emailPlaceholder}
                 className="min-w-0 flex-1 rounded-md px-3 text-xs font-bold text-foreground outline-none placeholder:text-muted"
               />
               <button
                 type="submit"
                 className="grid h-9 w-10 place-items-center rounded-md bg-primary text-white"
-                aria-label="Subscribe"
+                aria-label={copy.subscribeLabel}
               >
                 <ArrowRight className="h-4 w-4" />
               </button>
@@ -94,7 +81,7 @@ export default function Footer() {
         </div>
 
         <p className="mt-8 border-t border-white/12 pt-6 text-center text-xs font-semibold text-white/58">
-          © {new Date().getFullYear()} FluentFlow. All rights reserved.
+          © {new Date().getFullYear()} FluentFlow. {copy.copyright}
         </p>
       </div>
     </footer>
