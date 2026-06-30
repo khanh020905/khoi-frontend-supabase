@@ -32,7 +32,7 @@ export default function DashboardPage() {
 
   // Auth state
   const [user, setUser] = useState<SupabaseUser | null>(null);
-  const [authLoading, setAuthLoading] = useState(true);
+  const [authLoading, setAuthLoading] = useState(Boolean(supabase));
 
   // Status state
   const [userStatus, setUserStatus] = useState<UserStatus | null>(null);
@@ -72,7 +72,6 @@ export default function DashboardPage() {
   // ── Check auth on mount + listen for auth changes ──
   useEffect(() => {
     if (!supabase) {
-      setAuthLoading(false);
       return;
     }
 
@@ -215,8 +214,11 @@ export default function DashboardPage() {
       {/* Top bar */}
       <header className="border-b border-border/50 bg-surface/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 text-primary group">
-            <BookOpen className="w-7 h-7" />
+          <Link href="/" className="group flex items-center gap-2.5">
+            <span className="relative grid h-10 w-10 place-items-center rounded-[14px] bg-[linear-gradient(135deg,#5b48e8,#29b8c8)] text-white shadow-[0_8px_24px_rgba(91,72,232,0.22)]">
+              <BookOpen className="h-5 w-5" />
+              <span className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full border-2 border-white bg-accent" />
+            </span>
             <span className="text-xl font-bold tracking-tight text-foreground">
               FluentFlow
             </span>

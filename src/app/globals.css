@@ -1,18 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fafaf9; /* Warm off-white */
-  --foreground: #1e293b; /* Soft dark slate */
-  --primary: #0284c7; /* Friendly Sky Blue */
-  --primary-light: #38bdf8;
-  --primary-dark: #0369a1;
-  --secondary: #0ea5e9;
-  --accent: #f59e0b; /* Amber for warmth */
+  --background: #fbfaff;
+  --foreground: #171533;
+  --primary: #5b48e8;
+  --primary-light: #8d80ff;
+  --primary-dark: #332196;
+  --secondary: #29b8c8;
+  --accent: #ff6b70;
   --surface: #ffffff;
-  --surface-secondary: #f1f5f9;
-  --muted: #64748b;
-  --border: #e2e8f0;
-  --success: #10b981;
+  --surface-secondary: #f4f2ff;
+  --muted: #706b8e;
+  --border: #e9e5f6;
+  --success: #37b978;
 }
 
 @theme inline {
@@ -36,6 +36,11 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Smooth scrolling */
@@ -98,8 +103,8 @@ html {
 
 /* Section fade-in on scroll (initial state) */
 .section-animate {
-  opacity: 0;
-  transform: translateY(24px);
+  opacity: 1;
+  transform: translateY(0);
   transition: opacity 0.7s ease-out, transform 0.7s ease-out;
 }
 

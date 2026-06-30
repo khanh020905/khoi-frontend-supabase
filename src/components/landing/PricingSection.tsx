@@ -8,110 +8,89 @@ const plans = [
   {
     name: "Free",
     price: "$0",
-    period: "forever",
-    description: "Start learning with essential features",
-    features: [
-      "5 vocabulary words per day",
-      "Basic grammar lessons",
-      "Standard listening exercises",
-      "Progress dashboard",
-    ],
-    cta: "Get started free",
+    period: "month",
+    features: ["5 lessons per day", "Basic vocabulary review", "Standard exercises"],
+    cta: "Get started",
     highlighted: false,
   },
   {
-    name: "Pro",
-    price: "$9",
-    period: "per month",
-    description: "Unlock the full learning experience",
+    name: "Premium",
+    price: "$9.99",
+    period: "month",
     features: [
-      "Unlimited daily vocabulary",
-      "AI speaking practice & feedback",
-      "Advanced grammar lessons",
-      "Smart review system",
-      "Detailed analytics",
+      "Unlimited lessons",
+      "AI feedback & corrections",
+      "Speaking with AI",
+      "Progress insights",
     ],
-    cta: "Start Pro trial",
+    cta: "Start 7-day free trial",
     highlighted: true,
   },
   {
-    name: "Premium",
-    price: "$19",
-    period: "per month",
-    description: "For serious learners and professionals",
-    features: [
-      "Everything in Pro",
-      "1-on-1 AI tutor sessions",
-      "Business English module",
-      "IELTS/TOEFL preparation",
-      "Priority email support",
-    ],
-    cta: "Go Premium",
+    name: "Premium Plus",
+    price: "$14.99",
+    period: "month",
+    features: ["Everything in Premium", "Priority feedback", "Live group sessions", "Certificate of completion"],
+    cta: "Start 7-day free trial",
     highlighted: false,
   },
 ];
 
 export default function PricingSection() {
   const ref = useSectionReveal();
-  
+
   return (
-    <section ref={ref} id="pricing" className="section-animate py-24 bg-surface-secondary/50 border-y border-border">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground">
-            Simple, transparent pricing
+    <section ref={ref} id="pricing" className="section-animate bg-[#fbfaff] py-14 sm:py-16">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-10 text-center">
+          <h2 className="text-2xl font-black text-foreground sm:text-3xl">
+            Simple pricing for everyone
           </h2>
-          <p className="mt-4 text-lg text-muted">
-            Start free, upgrade when you&apos;re ready. Cancel anytime.
-          </p>
+          <p className="mt-2 text-sm font-bold text-muted">Start free. Upgrade anytime.</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="grid gap-5 lg:grid-cols-3">
           {plans.map((plan) => (
-            <div
+            <article
               key={plan.name}
-              className={`rounded-3xl p-8 flex flex-col bg-white transition-all ${
+              className={`relative flex min-h-[316px] flex-col rounded-lg bg-white p-7 shadow-[0_12px_34px_rgba(45,35,103,0.05)] ${
                 plan.highlighted
-                  ? "border-2 border-primary shadow-sm relative"
+                  ? "border-2 border-primary pt-10"
                   : "border border-border"
               }`}
             >
               {plan.highlighted && (
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-white text-xs font-bold rounded-full">
-                  Most Popular
+                <div className="absolute inset-x-0 top-0 rounded-t-md bg-primary py-2 text-center text-xs font-black text-white">
+                  Most popular
                 </div>
               )}
 
-              <div className="mb-6">
-                <h3 className="text-lg font-semibold text-foreground">{plan.name}</h3>
-                <p className="text-sm text-muted mt-2 min-h-[40px]">{plan.description}</p>
+              <h3 className="text-lg font-black text-foreground">{plan.name}</h3>
+              <div className="mt-3 flex items-end gap-1">
+                <span className="text-3xl font-black text-foreground">{plan.price}</span>
+                <span className="pb-1 text-xs font-bold text-muted">/ {plan.period}</span>
               </div>
 
-              <div className="mb-8">
-                <span className="text-4xl font-bold text-foreground">{plan.price}</span>
-                <span className="text-sm text-muted ml-1">/{plan.period}</span>
-              </div>
-
-              <ul className="space-y-4 mb-8 flex-1">
+              <ul className="mt-7 grid flex-1 gap-3">
                 {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-3">
-                    <Check className={`w-5 h-5 flex-shrink-0 ${plan.highlighted ? "text-primary" : "text-success"}`} />
-                    <span className="text-sm text-muted">{feature}</span>
+                  <li key={feature} className="flex items-start gap-3 text-sm font-semibold text-muted">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-success" />
+                    {feature}
                   </li>
                 ))}
               </ul>
 
               <Link
                 href="/signup"
-                className={`block w-full text-center py-3 rounded-xl text-sm font-medium transition-colors ${
+                className={`mt-8 flex h-11 items-center justify-center rounded-lg border text-sm font-black transition-colors ${
                   plan.highlighted
-                    ? "text-white bg-primary hover:bg-primary-dark"
-                    : "text-foreground bg-surface-secondary hover:bg-border"
+                    ? "border-primary bg-primary text-white hover:bg-primary-dark"
+                    : "border-primary text-primary hover:bg-surface-secondary"
                 }`}
               >
                 {plan.cta}
               </Link>
-            </div>
+            </article>
           ))}
         </div>
       </div>
