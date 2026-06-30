@@ -34,8 +34,11 @@ export default function Sidebar() {
   return (
     <aside className="w-64 bg-white border-r border-border h-screen flex flex-col fixed left-0 top-0">
       <div className="p-6 border-b border-border">
-        <Link href="/" className="flex items-center gap-2 text-primary">
-          <BookOpen className="w-6 h-6" />
+        <Link href="/" className="flex items-center gap-2.5">
+          <span className="relative grid h-10 w-10 place-items-center rounded-[14px] bg-[linear-gradient(135deg,#5b48e8,#29b8c8)] text-white shadow-[0_8px_24px_rgba(91,72,232,0.22)]">
+            <BookOpen className="h-5 w-5" />
+            <span className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full border-2 border-white bg-accent" />
+          </span>
           <span className="text-xl font-bold tracking-tight text-foreground">
             FluentFlow
           </span>

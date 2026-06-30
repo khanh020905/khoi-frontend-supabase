@@ -1,16 +1,10 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  display: "swap",
-});
-
 export const metadata: Metadata = {
-  title: "FluentFlow — Master English with Daily Practice",
+  title: "FluentFlow — Speak English with Confidence",
   description:
-    "Improve your English with daily vocabulary practice, speaking exercises, grammar lessons, listening activities, and personalized progress tracking. Join learners from 30+ countries.",
+    "Personalized English lessons, speaking practice, vocabulary review, and progress tracking for learners worldwide.",
 };
 
 export default function RootLayout({
@@ -19,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${plusJakartaSans.className} h-full antialiased`}>
+    <html lang="en" className="h-full antialiased">
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );

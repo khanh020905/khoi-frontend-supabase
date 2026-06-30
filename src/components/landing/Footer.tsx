@@ -1,35 +1,101 @@
 import Link from "next/link";
-import { BookOpen } from "lucide-react";
+import { ArrowRight, BookOpen, MessageCircle, Music2, Send } from "lucide-react";
+
+const columns = [
+  {
+    title: "Product",
+    links: ["Features", "Courses", "Pricing", "Mobile App"],
+  },
+  {
+    title: "Learn",
+    links: ["Blog", "Study Tips", "Help Center", "Community"],
+  },
+  {
+    title: "Company",
+    links: ["About Us", "Careers", "Press", "Contact"],
+  },
+  {
+    title: "Legal",
+    links: ["Terms of Service", "Privacy Policy", "Cookie Policy"],
+  },
+];
 
 export default function Footer() {
   return (
-    <footer className="border-t border-border bg-surface-secondary/30 py-12">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="text-center md:text-left">
-            <Link href="/" className="flex items-center gap-2 justify-center md:justify-start text-primary">
-              <BookOpen className="w-6 h-6" />
-              <span className="text-lg font-bold tracking-tight text-foreground">
-                FluentFlow
+    <footer id="footer" className="bg-[#27235d] py-9 text-white">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-9 lg:grid-cols-[1.2fr_2fr_1.5fr]">
+          <div>
+            <Link href="/" className="flex items-center gap-2.5">
+              <span className="relative grid h-10 w-10 place-items-center rounded-[14px] bg-[linear-gradient(135deg,#5b48e8,#29b8c8)] text-white shadow-[0_8px_24px_rgba(91,72,232,0.22)]">
+                <BookOpen className="h-5 w-5" />
+                <span className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full border-2 border-white bg-accent" />
               </span>
+              <span className="text-lg font-black">FluentFlow</span>
             </Link>
-            <p className="text-sm text-muted mt-2 max-w-xs">
-              Build your English habit in 10 minutes a day with daily lessons designed to make you fluent.
+            <p className="mt-4 max-w-xs text-xs font-semibold leading-6 text-white/68">
+              Helping millions of learners around the world speak English with confidence.
             </p>
+            <div className="mt-5 flex gap-2">
+              {[MessageCircle, Music2, Send].map((Icon, index) => (
+                <a
+                  key={index}
+                  href="#"
+                  className="grid h-8 w-8 place-items-center rounded-full bg-white/10 text-white/76 transition-colors hover:bg-white/18 hover:text-white"
+                  aria-label="Social link"
+                >
+                  <Icon className="h-4 w-4" />
+                </a>
+              ))}
+            </div>
           </div>
 
-          <div className="flex items-center gap-6">
-            <a href="#" className="text-sm font-medium text-muted hover:text-primary transition-colors">Terms</a>
-            <a href="#" className="text-sm font-medium text-muted hover:text-primary transition-colors">Privacy</a>
-            <a href="#" className="text-sm font-medium text-muted hover:text-primary transition-colors">Contact</a>
+          <div className="grid grid-cols-2 gap-7 sm:grid-cols-4">
+            {columns.map((column) => (
+              <div key={column.title}>
+                <h3 className="text-xs font-black text-white">{column.title}</h3>
+                <ul className="mt-3 grid gap-2.5">
+                  {column.links.map((link) => (
+                    <li key={link}>
+                      <a href="#" className="text-xs font-semibold text-white/66 hover:text-white">
+                        {link}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          <div>
+            <h3 className="text-xs font-black text-white">Stay in the loop</h3>
+            <p className="mt-3 text-xs font-semibold leading-6 text-white/68">
+              Get learning tips and updates delivered to your inbox.
+            </p>
+            <form className="mt-5 flex rounded-lg bg-white p-1">
+              <label className="sr-only" htmlFor="footer-email">
+                Email address
+              </label>
+              <input
+                id="footer-email"
+                type="email"
+                placeholder="Enter your email"
+                className="min-w-0 flex-1 rounded-md px-3 text-xs font-bold text-foreground outline-none placeholder:text-muted"
+              />
+              <button
+                type="submit"
+                className="grid h-9 w-10 place-items-center rounded-md bg-primary text-white"
+                aria-label="Subscribe"
+              >
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            </form>
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-border text-center md:text-left">
-          <p className="text-sm text-muted">
-            © {new Date().getFullYear()} FluentFlow. All rights reserved.
-          </p>
-        </div>
+        <p className="mt-8 border-t border-white/12 pt-6 text-center text-xs font-semibold text-white/58">
+          © {new Date().getFullYear()} FluentFlow. All rights reserved.
+        </p>
       </div>
     </footer>
   );

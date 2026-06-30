@@ -12,14 +12,13 @@ export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [checkingAuth, setCheckingAuth] = useState(true);
+  const [checkingAuth, setCheckingAuth] = useState(Boolean(supabase));
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
   // If already logged in, redirect to dashboard
   useEffect(() => {
     if (!supabase) {
-      setCheckingAuth(false);
       return;
     }
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -105,8 +104,11 @@ export default function SignupPage() {
 
         <div className="bg-white rounded-3xl border border-border shadow-sm p-8 sm:p-10">
           {/* Logo */}
-          <div className="flex items-center gap-2 mb-8 text-primary">
-            <BookOpen className="w-7 h-7" />
+          <div className="mb-8 flex items-center gap-2.5">
+            <span className="relative grid h-10 w-10 place-items-center rounded-[14px] bg-[linear-gradient(135deg,#5b48e8,#29b8c8)] text-white shadow-[0_8px_24px_rgba(91,72,232,0.22)]">
+              <BookOpen className="h-5 w-5" />
+              <span className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full border-2 border-white bg-accent" />
+            </span>
             <span className="text-xl font-bold tracking-tight text-foreground">
               FluentFlow
             </span>
