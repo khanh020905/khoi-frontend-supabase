@@ -16,35 +16,15 @@ import {
   User,
 } from "lucide-react";
 import { useSectionReveal } from "@/components/hooks/useSectionReveal";
+import { useLandingI18n } from "@/components/landing/i18n";
 
-const menu = [
-  { label: "Learn", icon: BookOpen, active: true },
-  { label: "Practice", icon: Mic },
-  { label: "Vocabulary", icon: Star },
-  { label: "Leaderboard", icon: Trophy },
-  { label: "Profile", icon: User },
-  { label: "Settings", icon: Settings },
-];
-
-const lessons = [
-  {
-    unit: "Unit 4: Everyday Life",
-    title: "Lesson 1 - Meeting People",
-    progress: "100%",
-    state: "done",
-  },
-  {
-    unit: "Unit 3: Work & Study",
-    title: "Lesson 3 - Office Conversations",
-    progress: "60%",
-    state: "progress",
-  },
-  {
-    unit: "Unit 3: Work & Study",
-    title: "Lesson 2 - Email & Messages",
-    progress: "0%",
-    state: "locked",
-  },
+const menuIcons = [
+  { icon: BookOpen, active: true },
+  { icon: Mic },
+  { icon: Star },
+  { icon: Trophy },
+  { icon: User },
+  { icon: Settings },
 ];
 
 export default function MiniLessonSection() {
@@ -64,6 +44,9 @@ export default function MiniLessonSection() {
 }
 
 function SidebarMockup() {
+  const { t } = useLandingI18n();
+  const copy = t.miniLesson;
+
   return (
     <aside className="rounded-[22px] bg-[#27235d] p-5 text-white shadow-[0_24px_60px_rgba(39,35,93,0.23)]">
       <div className="flex items-center gap-2">
@@ -75,12 +58,13 @@ function SidebarMockup() {
       </div>
 
       <nav className="mt-8 grid gap-2">
-        {menu.map((item) => {
+        {menuIcons.map((item, index) => {
           const Icon = item.icon;
+          const label = copy.menu[index];
 
           return (
             <button
-              key={item.label}
+              key={label}
               className={`flex h-11 items-center gap-3 rounded-lg px-3 text-left text-xs font-black transition-colors ${
                 item.active ? "bg-primary text-white" : "text-white/82 hover:bg-white/10"
               }`}
@@ -89,7 +73,7 @@ function SidebarMockup() {
               <span className="grid h-7 w-7 place-items-center rounded-md bg-white text-[#27235d]">
                 <Icon className="h-4 w-4" />
               </span>
-              {item.label}
+              {label}
             </button>
           );
         })}
@@ -98,10 +82,10 @@ function SidebarMockup() {
       <div className="mt-10 rounded-xl bg-primary p-4">
         <div className="flex items-center gap-2">
           <Crown className="h-5 w-5 text-[#ffd36a]" />
-          <p className="text-xs font-black">Go Premium</p>
+          <p className="text-xs font-black">{copy.premiumTitle}</p>
         </div>
         <p className="mt-2 text-[11px] font-bold leading-5 text-white/76">
-          Unlock all lessons and advanced feedback.
+          {copy.premiumDescription}
         </p>
         <button className="mt-4 flex h-9 w-full items-center justify-between rounded-lg bg-white/14 px-3 text-[11px] font-black text-white">
           $9.99
@@ -113,12 +97,15 @@ function SidebarMockup() {
 }
 
 function LessonsPanel() {
+  const { t } = useLandingI18n();
+  const copy = t.miniLesson;
+
   return (
     <div>
       <div className="mb-5 flex items-center justify-between gap-4">
-        <h2 className="text-2xl font-black text-foreground">My Lessons</h2>
+        <h2 className="text-2xl font-black text-foreground">{copy.heading}</h2>
         <Link href="#courses" className="text-xs font-black text-primary">
-          View all
+          {copy.viewAll}
         </Link>
       </div>
 
@@ -128,19 +115,19 @@ function LessonsPanel() {
             <div className="mb-5 grid h-10 w-10 place-items-center rounded-xl bg-[#ffdce8] text-accent">
               <Star className="h-5 w-5 fill-current" />
             </div>
-            <p className="text-sm font-black text-foreground">Unit 4: Everyday Life</p>
-            <h3 className="mt-1 text-xl font-black text-foreground">Lesson 2 - At the Cafe</h3>
+            <p className="text-sm font-black text-foreground">{copy.unit}</p>
+            <h3 className="mt-1 text-xl font-black text-foreground">{copy.activeLesson}</h3>
             <p className="mt-4 max-w-sm text-sm font-medium leading-6 text-muted">
-              Learn useful phrases to order food, ask questions, and keep the conversation going.
+              {copy.activeDescription}
             </p>
             <div className="mt-5 flex items-center gap-3">
-              <span className="text-xs font-black text-foreground">75% complete</span>
+              <span className="text-xs font-black text-foreground">{copy.activeProgress}</span>
               <div className="h-2 w-36 overflow-hidden rounded-full bg-white">
                 <div className="h-full w-3/4 rounded-full bg-primary" />
               </div>
             </div>
             <button className="mt-5 rounded-lg bg-primary px-8 py-3 text-xs font-black text-white shadow-[0_12px_26px_rgba(91,72,232,0.23)]">
-              Continue
+              {copy.continue}
             </button>
           </div>
           <TutorIllustration />
@@ -148,7 +135,7 @@ function LessonsPanel() {
       </div>
 
       <div className="mt-4 grid gap-3">
-        {lessons.map((lesson) => (
+        {copy.lessons.map((lesson) => (
           <div
             key={lesson.title}
             className="flex items-center gap-4 rounded-lg border border-border bg-white px-5 py-4 shadow-[0_8px_20px_rgba(45,35,103,0.04)]"
@@ -189,6 +176,9 @@ function LessonsPanel() {
 }
 
 function StatsPanel() {
+  const { t } = useLandingI18n();
+  const copy = t.miniLesson;
+
   return (
     <aside className="grid content-start gap-4">
       <div className="rounded-lg border border-border bg-white p-5 shadow-[0_12px_30px_rgba(45,35,103,0.05)]">
@@ -197,21 +187,21 @@ function StatsPanel() {
             <Gem className="h-7 w-7" />
           </span>
           <div>
-            <h3 className="text-sm font-black text-foreground">Unlock Premium</h3>
+            <h3 className="text-sm font-black text-foreground">{copy.unlockTitle}</h3>
             <p className="mt-1 text-xs font-medium leading-5 text-muted">
-              Get unlimited feedback, advanced lessons, and more.
+              {copy.unlockDescription}
             </p>
           </div>
         </div>
         <button className="mt-5 h-10 w-full rounded-lg bg-[linear-gradient(90deg,#5b48e8,#ff6b70)] text-xs font-black text-white">
-          Upgrade now
+          {copy.upgrade}
         </button>
       </div>
 
       <div className="rounded-lg border border-border bg-white p-5 shadow-[0_12px_30px_rgba(45,35,103,0.05)]">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-black text-foreground">Daily Goal</h3>
-          <button className="text-xs font-black text-muted">Edit</button>
+          <h3 className="text-sm font-black text-foreground">{copy.dailyGoal}</h3>
+          <button className="text-xs font-black text-muted">{copy.edit}</button>
         </div>
         <div className="mt-5 flex items-center gap-4">
           <div className="grid h-16 w-16 place-items-center rounded-full bg-[conic-gradient(#5b48e8_60%,#ece9f8_0)]">
@@ -220,16 +210,16 @@ function StatsPanel() {
             </span>
           </div>
           <div>
-            <p className="text-xl font-black text-foreground">18 / 30 min</p>
-            <p className="mt-1 text-xs font-bold text-muted">Keep it up!</p>
+            <p className="text-xl font-black text-foreground">{copy.goalProgress}</p>
+            <p className="mt-1 text-xs font-bold text-muted">{copy.keepItUp}</p>
           </div>
         </div>
       </div>
 
       <div className="rounded-lg border border-border bg-white p-5 shadow-[0_12px_30px_rgba(45,35,103,0.05)]">
         <div className="mb-4 flex items-center justify-between">
-          <h3 className="text-sm font-black text-foreground">Leaderboard</h3>
-          <p className="text-xs font-bold text-muted">This week</p>
+          <h3 className="text-sm font-black text-foreground">{copy.leaderboard}</h3>
+          <p className="text-xs font-bold text-muted">{copy.thisWeek}</p>
         </div>
         {[
           ["Emma", "2100 XP"],
@@ -251,7 +241,7 @@ function StatsPanel() {
           </div>
         ))}
         <Link href="/signup" className="mt-3 block text-center text-xs font-black text-primary">
-          View full leaderboard
+          {copy.fullLeaderboard}
         </Link>
       </div>
     </aside>
@@ -259,6 +249,9 @@ function StatsPanel() {
 }
 
 function TutorIllustration() {
+  const { t } = useLandingI18n();
+  const copy = t.miniLesson;
+
   return (
     <div className="relative hidden min-h-[188px] overflow-hidden rounded-lg sm:block">
       <Image
@@ -272,9 +265,9 @@ function TutorIllustration() {
       />
       <div className="absolute inset-y-0 left-0 w-1/3 bg-[linear-gradient(90deg,rgba(242,240,255,0.3),rgba(242,240,255,0))]" />
       <div className="absolute left-3 top-[4.25rem] rounded-xl bg-white px-4 py-3 text-center text-xs font-black text-foreground shadow-[0_10px_24px_rgba(45,35,103,0.12)]">
-        How was
+        {copy.tutorBubble[0]}
         <br />
-        your day?
+        {copy.tutorBubble[1]}
       </div>
     </div>
   );

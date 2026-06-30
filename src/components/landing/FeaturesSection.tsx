@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Brain, Flame, Headphones, MessageCircle, NotebookTabs } from "lucide-react";
 import { useSectionReveal } from "@/components/hooks/useSectionReveal";
+import { useLandingI18n } from "@/components/landing/i18n";
 
 const features = [
   {
@@ -54,21 +55,24 @@ const features = [
 
 export default function FeaturesSection() {
   const ref = useSectionReveal();
+  const { t } = useLandingI18n();
+  const copy = t.features;
 
   return (
     <section ref={ref} id="features" className="section-animate bg-white py-12 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h2 className="text-center text-2xl font-black tracking-tight text-foreground sm:text-3xl">
-          Everything you need to grow your English
+          {copy.heading}
         </h2>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {features.map((feature) => {
+          {features.map((feature, index) => {
             const Icon = feature.icon;
+            const localizedFeature = copy.items[index];
 
             return (
               <article
-                key={feature.title}
+                key={localizedFeature.title}
                 className="relative aspect-square overflow-hidden rounded-lg border border-border bg-white shadow-[0_12px_30px_rgba(45,35,103,0.08)] transition-transform hover:-translate-y-1"
               >
                 <Image
@@ -88,9 +92,9 @@ export default function FeaturesSection() {
                   <Icon className={`h-8 w-8 ${feature.color}`} />
                 </div>
                 <div className="sr-only">
-                  <h3>{feature.title}</h3>
+                  <h3>{localizedFeature.title}</h3>
                   <p>
-                    {feature.description}
+                    {localizedFeature.description}
                   </p>
                 </div>
               </article>
